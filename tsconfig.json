@@ -13,6 +13,6 @@
     "require": ["tsconfig-paths/register"]
   },
   "files": ["src/@types/express.d.ts"],
-  "include": ["src/**/*.ts", "src/**/*.ejs"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"],
 }
