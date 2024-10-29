@@ -1,4 +1,4 @@
-import { compare, genSalt } from "bcrypt";
+import { compare, genSalt } from "bcryptjs";
 import { sql } from "drizzle-orm";
 import { Request, Response } from "express";
 import { hash } from "crypto";
