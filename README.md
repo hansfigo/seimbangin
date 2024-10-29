@@ -11,8 +11,8 @@
 1. `npm i`
 2. create database klean
 3. trus buat `.env` dari `.env example`
-4. sesuai kan file env dngn database klean, <br> **note** : password gabisa kosong, jadi buat user baru aja di mysql dan isi password
-5. untuk migrate jalankan `npx drizzle-kit migrate`
+4. sesuai kan file env dngn database klean
+5. untuk migrate jalankan `npm run migrate`
 6. running app `npm run dev`
 7. yeyy hrusnya express app kita jalan
    
@@ -23,9 +23,14 @@
 - Mysql
 - JWT
 
-### Important note !!
-- database user gaboleh kosong passowrdny , klo g error ntar, buat user baru aja
+### Migration Guide 
+- edit `/db/schema.ts`
+- run `npm run generate`
+- finally `npm run migrate`
 
+### Important note !!
+- database passoword optional, boleh kosong boleh g, cuman klo kosong gabisa run drizzle stuido
+  
 ### Build for prod !!
 - `npm run build`
 - terakhir untuk mulai servernya `npm run start`
