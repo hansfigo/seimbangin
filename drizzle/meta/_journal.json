@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1730026808162,
+      "tag": "0000_smart_electro",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1730029899079,
+      "tag": "0001_empty_the_liberteens",
+      "breakpoints": true
+    }
+  ]
+}

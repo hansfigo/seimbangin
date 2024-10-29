@@ -1,0 +1,45 @@
+{
+  "name": "seimbangin-be",
+  "version": "1.0.0",
+  "description": "seimbang.in backend ",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.json && npm run copy-assets",
+    "copy-assets": "ts-node scripts/copy-assets",
+    "start": "node dist/index.js",
+    "clean": "rimraf dist .logs",
+    "dev": "nodemon src/index.ts"
+  },
+  "author": "figomager",
+  "license": "ISC",
+  "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express-session": "^1.18.0",
+    "@types/uuid": "^10.0.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.35.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.3",
+    "uuid": "^11.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.8.1",
+    "@types/shelljs": "^0.8.15",
+    "concurrently": "^9.0.1",
+    "drizzle-kit": "^0.26.2",
+    "nodemon": "^3.1.7",
+    "rimraf": "^6.0.1",
+    "shelljs": "^0.8.5",
+    "ts-node": "^10.9.2",
+    "ts-patch": "^3.2.1",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
