@@ -31,7 +31,7 @@ const authController = {
     }
 
     // destructure the required fields
-    const { first_name, last_name, username, email, password } = req.body;
+    const { first_name, last_name, username, email, password, age } = req.body;
 
     try {
       // hash the password
@@ -45,6 +45,7 @@ const authController = {
           last_name,
           username,
           email,
+          age,
           password: hashedPassword,
         });
       } catch (error) {

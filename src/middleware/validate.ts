@@ -6,6 +6,7 @@ const validate = {
         check("last_name").isString(),
         check("username").isString(),
         check("email").isEmail(),
+        check("age").isNumeric(),
         check("password").isLength({ min: 3 }),
     ],
     login: [
