@@ -1,7 +1,6 @@
-import { compare, genSalt } from "bcryptjs";
+import { hash, compare, genSalt } from "bcryptjs";
 import { sql } from "drizzle-orm";
 import { Request, Response } from "express";
-import { hash } from "crypto";
 import jwt from "jsonwebtoken";
 import db from "../db";
 import { usersTable } from "../db/schema";
@@ -10,6 +9,7 @@ import { validationResult } from "express-validator";
 const authController = {
   register: async (req: Request, res: Response) => {
     // check validaion from express-validator
+
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -33,37 +33,46 @@ const authController = {
     // destructure the required fields
     const { first_name, last_name, username, email, password } = req.body;
 
-    // hash the password
-    const salt = await genSalt(10);
-    const hashedPassword = await hash(password, salt);
-
     try {
-      // insert the user into the database
-      await db.insert(usersTable).values({
-        first_name,
-        last_name,
-        username,
-        email,
-        password: hashedPassword,
+      // hash the password
+      const salt = await genSalt(10);
+      const hashedPassword = await hash(password, salt);
+
+      try {
+        // insert the user into the database
+        await db.insert(usersTable).values({
+          first_name,
+          last_name,
+          username,
+          email,
+          password: hashedPassword,
+        });
+      } catch (error) {
+        console.log(error, "Error occurred while registering the user");
+
+        res.status(500).send({
+          message: "An error occurred while registering the user",
+        });
+        return;
+      }
+
+      res.send({
+        status: "success",
+        data: {
+          first_name,
+          last_name,
+          username,
+          email,
+        },
       });
     } catch (error) {
-      console.log(error, "Error occurred while registering the user");
+      console.log(error, "Error occurred while hashing the password");
 
       res.status(500).send({
-        message: "An error occurred while registering the user",
+        message: "An error occurred while hashing the password",
       });
       return;
     }
-
-    res.send({
-      status: "success",
-      data: {
-        first_name,
-        last_name,
-        username,
-        email,
-      }
-    });
   },
 
   login: async (req: Request, res: Response) => {
@@ -93,10 +102,10 @@ const authController = {
     const passwordMatch = await compare(password, existingUser.password);
 
     if (!passwordMatch) {
-        res.status(403).send({
-          status: "error",
-          message: "Nguwawor Salah Password",
-        });
+      res.status(403).send({
+        status: "error",
+        message: "Nguwawor Salah Password",
+      });
 
       return;
     }
@@ -122,7 +131,7 @@ const authController = {
         status: "success",
         data: {
           token,
-          expiresIn
+          expiresIn,
         },
       });
     } catch (error) {
