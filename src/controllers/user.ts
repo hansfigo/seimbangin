@@ -1,8 +1,22 @@
 import { Request, Response } from "express";
 import { gcsHelper } from "../utils/googleCloudStorageHelper";
+import db from "../db";
+import { usersTable } from "../db/schema";
+import { eq } from "drizzle-orm";
 
 export const UserController = {
   uploadPfp: async (req: Request, res: Response) => {
+    const userId = req.params.userId;
+
+    if (!userId) {
+      res.status(400).send({
+        status: "error",
+        message: "Please provide a user ID",
+      });
+
+      return;
+    }
+
     const photo = req.file;
 
     if (!photo) {
@@ -20,6 +34,11 @@ export const UserController = {
         file: photo,
         folder: "profile-pictures",
       });
+
+      await db
+        .update(usersTable)
+        .set({ profilePicture: fileUrl })
+        .where(eq(usersTable.id, parseInt(userId)));
 
       res.send({
         status: "success",

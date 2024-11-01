@@ -4,7 +4,7 @@ import path from "path";
 const googleCredential = process.env.GOOGLE_CLOUD_CREDENTIALS || "";
 
 const storage = new Storage({
-  keyFilename: path.resolve(__dirname, "../../", googleCredential),
+  credentials: JSON.parse(googleCredential),
 });
 
 const bucketName = process.env.BUCKET_NAME || "";

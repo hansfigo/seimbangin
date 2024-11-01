@@ -5,7 +5,7 @@ import { UserController } from "../controllers/user";
 const userRouter = Router();
 
 userRouter.post(
-  "/upload-pfp",
+  "/upload-pfp/:userId",
   multerUpload.single("photo"),
   UserController.uploadPfp
 );

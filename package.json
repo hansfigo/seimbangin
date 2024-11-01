@@ -13,6 +13,7 @@
     "generate": "drizzle-kit generate",
     "migrate": "tsx src/db/migrate.ts",
     "vercel-dev": "vercel dev --listen 5005",
+    "v-deploy": "vercel build && vercel --prod",
     "v-build": "npm run build && vercel build && vercel --prod"
   },
   "author": "figomager",

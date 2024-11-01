@@ -15,7 +15,7 @@ interface GcsHelperParams {
 }
 
 const gcsHelper = {
-  uploadFile: async ({ file, folder }: GcsHelperParams) => {
+  uploadFile: async ({ file, folder }: GcsHelperParams): Promise<string> => {
     return new Promise((resolve, reject) => {
       const blob = bucket.file(`${folder}/${file.originalname}`);
       const blobStream = blob.createWriteStream({

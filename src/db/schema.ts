@@ -14,6 +14,7 @@ export const usersTable = mysqlTable("users", {
   role: int().notNull().default(0).notNull(), // 0 for user, 1 for admin
   first_name: varchar({ length: 255 }).notNull(),
   last_name: varchar({ length: 255 }).notNull(),
+  age: int().notNull().default(17),
   username: varchar({ length: 255 }).notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
   password: varchar({ length: 255 }).notNull(),

@@ -16,13 +16,13 @@ app.set("view engine", "ejs");
 app.use("/", authRouter);
 app.use("/", userRouter);
 
-app.get("/", (res: Response) => {
+app.get("/", ( req : Request, res: Response,) => {
   res.render("index", {
     title: "seimbang.in",
   });
 });
 
-app.get("/protected", authenticateJWT, (res: Response) => {
+app.get("/protected", authenticateJWT, (req : Request, res: Response) => {
   res.send({
     message: "This is a protected route",
     data: {
