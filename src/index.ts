@@ -14,7 +14,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use("/", authRouter);
-app.use("/", userRouter);
+app.use("/user", userRouter);
 
 app.get("/", ( req : Request, res: Response,) => {
   res.render("index", {

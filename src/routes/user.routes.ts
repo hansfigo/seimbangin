@@ -10,4 +10,6 @@ userRouter.post(
   UserController.uploadPfp
 );
 
+userRouter.put("/:userId", UserController.update);
+
 export default userRouter;
