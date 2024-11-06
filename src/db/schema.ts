@@ -41,9 +41,9 @@ export const userFinancial = mysqlTable("user_financial_profile", {
   user_id: bigint({ mode: "number" })
     .references(() => usersTable.id)
     .notNull(),
-  monthly_income: decimal(),
-  current_savings: decimal(),
-  debt: decimal(),
+  monthly_income: decimal({ precision: 16, scale: 2 }),
+  current_savings: decimal({ precision: 16, scale: 2 }),
+  debt: decimal({ precision: 16, scale: 2 }),
   financial_goals: text(),
   risk_management: decimal(),
 });
