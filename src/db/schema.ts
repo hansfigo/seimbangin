@@ -18,6 +18,7 @@ export const transactionCategoryEnums = mysqlEnum("category", [
   "shopping",
   "healthcare",
   "education",
+  "others",
 ]);
 
 // user table schema
@@ -26,7 +27,7 @@ export const usersTable = mysqlTable("users", {
   role: int().notNull().default(0).notNull(), // 0 for user, 1 for admin
   full_name: varchar({ length: 255 }).notNull(),
   age: int().notNull().default(17),
-  balance: int().notNull().default(0),
+  balance: decimal({ precision: 16, scale: 2 }).notNull().default("0.0"),
   username: varchar({ length: 255 }).notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
   password: varchar({ length: 255 }).notNull(),

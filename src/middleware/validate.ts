@@ -12,6 +12,12 @@ const validate = {
         check("email").isEmail(),
         check("password").isLength({ min: 3 }),
     ],
+    transaction: [
+        check("type").isNumeric(),
+        check("category").isString(),
+        check("amount").isNumeric(),
+        check("description").isString(),
+    ],
 }
 
 export default validate;
