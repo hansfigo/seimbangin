@@ -31,7 +31,7 @@ const authController = {
     }
 
     // destructure the required fields
-    const { first_name, last_name, username, email, password, age } = req.body;
+    const { full_name, username, email, password, age } = req.body;
 
     try {
       // hash the password
@@ -41,8 +41,7 @@ const authController = {
       try {
         // insert the user into the database
         await db.insert(usersTable).values({
-          first_name,
-          last_name,
+          full_name,
           username,
           email,
           age,
@@ -60,8 +59,7 @@ const authController = {
       res.send({
         status: "success",
         data: {
-          first_name,
-          last_name,
+          full_name,
           username,
           email,
         },

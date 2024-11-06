@@ -12,8 +12,7 @@ import {
 export const usersTable = mysqlTable("users", {
   id: serial().primaryKey(),
   role: int().notNull().default(0).notNull(), // 0 for user, 1 for admin
-  first_name: varchar({ length: 255 }).notNull(),
-  last_name: varchar({ length: 255 }).notNull(),
+  full_name: varchar({ length: 255 }).notNull(),
   age: int().notNull().default(17),
   balance: int().notNull().default(0),
   username: varchar({ length: 255 }).notNull(),

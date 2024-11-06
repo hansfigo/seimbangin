@@ -36,6 +36,13 @@
       "when": 1730515775519,
       "tag": "0004_right_revanche",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1730820921094,
+      "tag": "0005_nifty_talisman",
+      "breakpoints": true
     }
   ]
 }
