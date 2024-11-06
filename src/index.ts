@@ -4,6 +4,7 @@ import authRouter from "./routes/auth.routes";
 import path from "path";
 import userRouter from "./routes/user.routes";
 import transactionRouter from "./routes/transaction.routes";
+import financialProfileRouter from "./routes/financialProfile.routes";
 
 // intialize express
 const app: Express = express();
@@ -17,6 +18,7 @@ app.set("view engine", "ejs");
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/transaction", transactionRouter);
+app.use("/financial-profile", financialProfileRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.render("index", {

@@ -10,7 +10,7 @@ import {
   varchar,
 } from "drizzle-orm/mysql-core";
 
-export const transactionCategoryEnums = mysqlEnum("category", [
+const transactionCategoryEnums = mysqlEnum("category", [
   "food",
   "transportation",
   "utilities",
@@ -19,6 +19,12 @@ export const transactionCategoryEnums = mysqlEnum("category", [
   "healthcare",
   "education",
   "others",
+]);
+
+const riskManagementEnums = mysqlEnum("risk_management", [
+  "low",
+  "medium",
+  "high",
 ]);
 
 // user table schema
@@ -45,7 +51,7 @@ export const userFinancial = mysqlTable("user_financial_profile", {
   current_savings: decimal({ precision: 16, scale: 2 }),
   debt: decimal({ precision: 16, scale: 2 }),
   financial_goals: text(),
-  risk_management: decimal(),
+  risk_management: riskManagementEnums,
 });
 
 export const transactionsTable = mysqlTable("transactions", {

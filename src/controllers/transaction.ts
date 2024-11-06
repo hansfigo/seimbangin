@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import db from "../db";
 import { transactionsTable, usersTable } from "../db/schema";
 import { validationResult } from "express-validator";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export const transactionController = {
   create: async (req: Request, res: Response) => {
