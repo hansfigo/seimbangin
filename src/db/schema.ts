@@ -1,4 +1,6 @@
 import {
+  bigint,
+  decimal,
   int,
   mysqlEnum,
   mysqlTable,
@@ -8,9 +10,19 @@ import {
   varchar,
 } from "drizzle-orm/mysql-core";
 
+export const transactionCategoryEnums = mysqlEnum("category", [
+  "food",
+  "transportation",
+  "utilities",
+  "entertainment",
+  "shopping",
+  "healthcare",
+  "education",
+]);
+
 // user table schema
 export const usersTable = mysqlTable("users", {
-  id: serial().primaryKey(),
+  id: bigint({ mode: "number" }).primaryKey().autoincrement(),
   role: int().notNull().default(0).notNull(), // 0 for user, 1 for admin
   full_name: varchar({ length: 255 }).notNull(),
   age: int().notNull().default(17),
@@ -23,14 +35,27 @@ export const usersTable = mysqlTable("users", {
   updatedAt: timestamp("updated_at"),
 });
 
-// export const transactionsTable = mysqlTable("transactions", {
-//   id: serial().primaryKey(),
-//   user_id: int()
-//     .references(() => usersTable.id)
-//     .notNull(),
-//   type: int().notNull().default(0), // 0 for income , 1 for expense
-//   amount: int().notNull(),
-//   description: text("description"),
-//   createdAt: timestamp("created_at"),
-//   updatedAt: timestamp("updated_at"),
-// });
+export const userFinancial = mysqlTable("user_financial_profile", {
+  id: bigint({ mode: "number" }).primaryKey().autoincrement(),
+  user_id: bigint({ mode: "number" })
+    .references(() => usersTable.id)
+    .notNull(),
+  monthly_income: decimal(),
+  current_savings: decimal(),
+  debt: decimal(),
+  financial_goals: text(),
+  risk_management: decimal(),
+});
+
+export const transactionsTable = mysqlTable("transactions", {
+  id: bigint({ mode: "number" }).primaryKey().autoincrement(),
+  user_id: bigint({ mode: "number" })
+    .references(() => usersTable.id)
+    .notNull(),
+  type: int().notNull().default(0), // 0 for income , 1 for expense
+  category: transactionCategoryEnums.notNull(),
+  amount: decimal().notNull(),
+  description: text("description"),
+  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updated_at"),
+});
