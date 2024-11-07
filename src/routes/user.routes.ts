@@ -7,7 +7,7 @@ const userRouter = Router();
 userRouter.post(
   "/upload-pfp/:userId",
   multerUpload.single("photo"),
-  UserController.uploadPfp
+  UserController.uploadPfp,
 );
 
 userRouter.put("/:userId", UserController.update);

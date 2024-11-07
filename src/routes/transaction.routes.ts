@@ -9,7 +9,7 @@ transactionRouter.post(
   "/",
   authenticateJWT,
   validate.transaction,
-  transactionController.create
+  transactionController.create,
 );
 
 transactionRouter.get("/", authenticateJWT, transactionController.getAll);

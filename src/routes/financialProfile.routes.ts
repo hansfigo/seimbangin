@@ -10,7 +10,7 @@ financialProfileRouter.put(
   "/",
   authenticateJWT,
   validate.createFinancialProfile,
-  financialProfileController.update
+  financialProfileController.update,
 );
 
 export default financialProfileRouter;

@@ -10,11 +10,11 @@ export default defineConfig({
   out: "./drizzle",
   schema: "./src/db/schema.ts",
   dialect: "mysql",
-  
+
   dbCredentials: {
     host: host || "",
     user: user || "",
-    password: password || '',
+    password: password || "",
     database: database || "",
     port: 3306,
   },

@@ -37,6 +37,6 @@ app.get("/protected", authenticateJWT, (req: Request, res: Response) => {
 
 app.listen(3000, () => {
   console.log(
-    "🎉 Server Expressnya dah jalan ya beb! 🚀 disini yhh http://localhost:3000"
+    "🎉 Server Expressnya dah jalan ya beb! 🚀 disini yhh http://localhost:3000",
   );
 });

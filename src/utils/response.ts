@@ -23,7 +23,12 @@ export const createResponse = {
     });
   },
 
-  error: ({ res, status = 500, message = "An error occurred", data = null }: ErrorResponse) => {
+  error: ({
+    res,
+    status = 500,
+    message = "An error occurred",
+    data = null,
+  }: ErrorResponse) => {
     res.status(status).json({
       status: "error",
       code: status,

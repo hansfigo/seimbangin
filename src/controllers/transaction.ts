@@ -28,7 +28,7 @@ const updateBalance = async ({ newBalance, userId }: any) => {
       .update(usersTable)
       .set({
         balance: newBalance,
-        updatedAt : new Date()
+        updatedAt: new Date(),
       })
       .where(eq(usersTable.id, userId));
 
@@ -60,7 +60,7 @@ export const transactionController = {
       });
       return;
     }
-    
+
     const balance = parseFloat(user.balance);
     const transactionAmount = parseFloat(amount);
 
@@ -84,7 +84,7 @@ export const transactionController = {
         amount,
         description,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       });
 
       const newBalance = createNewBalance({

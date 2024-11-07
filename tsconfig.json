@@ -6,7 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "outDir": "./dist",
+    "outDir": "./dist"
   },
   "ts-node": {
     "files": true,
@@ -14,5 +14,5 @@
   },
   "files": ["src/@types/express.d.ts"],
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules"]
 }
