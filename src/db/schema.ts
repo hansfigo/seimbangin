@@ -4,7 +4,6 @@ import {
   int,
   mysqlEnum,
   mysqlTable,
-  serial,
   text,
   timestamp,
   varchar,

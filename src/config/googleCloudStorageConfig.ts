@@ -1,5 +1,4 @@
 import { Storage } from "@google-cloud/storage";
-import path from "path";
 
 const googleCredential = process.env.GOOGLE_CLOUD_CREDENTIALS || "";
 

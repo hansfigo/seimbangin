@@ -3,7 +3,6 @@ import { gcsHelper } from "../utils/googleCloudStorageHelper";
 import db from "../db";
 import { usersTable } from "../db/schema";
 import { eq } from "drizzle-orm";
-import { parse } from "path";
 
 export const UserController = {
   uploadPfp: async (req: Request, res: Response) => {

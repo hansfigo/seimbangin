@@ -1,6 +1,5 @@
 import multer from "multer";
 import { bucket } from "../config/googleCloudStorageConfig";
-import { Request, Response } from "express";
 
 const multerUpload = multer({
   storage: multer.memoryStorage(),
