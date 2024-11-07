@@ -5,7 +5,7 @@ const validate = {
     check("full_name").isString(),
     check("username").isString(),
     check("email").isEmail(),
-    check("age").isNumeric(),
+    check("age").isNumeric().optional(),
     check("password").isLength({ min: 3 }),
   ],
   login: [check("email").isEmail(), check("password").isLength({ min: 3 })],
