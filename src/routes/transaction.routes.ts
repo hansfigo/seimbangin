@@ -12,4 +12,7 @@ transactionRouter.post(
   transactionController.create
 );
 
+transactionRouter.get("/", authenticateJWT, transactionController.getAll);
+transactionRouter.delete("/:id", authenticateJWT, transactionController.delete);
+
 export default transactionRouter;

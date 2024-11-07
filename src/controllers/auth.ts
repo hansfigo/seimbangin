@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import db from "../db";
 import { usersTable } from "../db/schema";
 import { validationResult } from "express-validator";
+import { createResponse } from "../utils/response";
 
 const authController = {
   register: async (req: Request, res: Response) => {
@@ -13,7 +14,12 @@ const authController = {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      res.status(400).json({ errors: errors.array() });
+      createResponse.error({
+        res,
+        status: 400,
+        message: "Validation Error",
+        data: errors.array(),
+      });
       return;
     }
 
@@ -24,7 +30,9 @@ const authController = {
       .where(sql`${usersTable.email} = ${req.body.email}`);
 
     if (emailExists.length > 0) {
-      res.status(400).send({
+      createResponse.error({
+        res,
+        status: 400,
         message: "Email already exists",
       });
       return;
@@ -46,29 +54,27 @@ const authController = {
           email,
           age,
           password: hashedPassword,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         });
       } catch (error) {
-        console.log(error, "Error occurred while registering the user");
-
-        res.status(500).send({
-          message: "An error occurred while registering the user",
+        createResponse.error({
+          res,
+          status: 500,
+          message: "Error occurred while inserting the user",
         });
         return;
       }
 
-      res.send({
-        status: "success",
-        data: {
-          full_name,
-          username,
-          email,
-        },
+      createResponse.success({
+        res,
+        message: "User registered successfully",
       });
     } catch (error) {
-      console.log(error, "Error occurred while hashing the password");
-
-      res.status(500).send({
-        message: "An error occurred while hashing the password",
+      createResponse.error({
+        res,
+        status: 500,
+        message: "Error occurred while hashing the password",
       });
       return;
     }
@@ -78,8 +84,12 @@ const authController = {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      res.status(400).json({ errors: errors.array() });
-      return;
+      createResponse.error({
+        res,
+        status: 400,
+        message: "Validation Error",
+        data: errors.array(),
+      });
     }
 
     const { password, email } = req.body;
@@ -90,9 +100,10 @@ const authController = {
       .where(sql`${usersTable.email} = ${email}`);
 
     if (queryUser.length == 0) {
-      res.status(400).send({
-        status: "error",
-        error: "User Not Found !!",
+      createResponse.error({
+        res,
+        status: 404,
+        message: "User not found",
       });
     }
 
@@ -101,11 +112,11 @@ const authController = {
     const passwordMatch = await compare(password, existingUser.password);
 
     if (!passwordMatch) {
-      res.status(403).send({
-        status: "error",
-        message: "Nguwawor Salah Password",
+      createResponse.error({
+        res,
+        status: 401,
+        message: "Invalid credentials",
       });
-
       return;
     }
 
@@ -126,28 +137,22 @@ const authController = {
         expiresIn: expiresIn,
       });
 
-      res.send({
-        status: "success",
+      createResponse.success({
+        res,
+        message: "Login Success",
         data: {
           token,
           expiresIn,
         },
       });
     } catch (error) {
-      res.status(500).send({
-        error: "Internal Server Error",
-        message: error,
+      createResponse.error({
+        res,
+        status: 500,
+        message: "Error occurred while creating the token",
       });
       return;
     }
-  },
-
-  logout: (req: Request, res: Response) => {
-    req.session.destroy(() => {
-      res.send({
-        message: "Logout Success",
-      });
-    });
   },
 };
 

@@ -38,7 +38,7 @@ export const UserController = {
 
       await db
         .update(usersTable)
-        .set({ profilePicture: fileUrl })
+        .set({ profilePicture: fileUrl, updatedAt: new Date() })
         .where(eq(usersTable.id, parseInt(userId)));
 
       res.send({

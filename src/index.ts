@@ -30,7 +30,7 @@ app.get("/protected", authenticateJWT, (req: Request, res: Response) => {
   res.send({
     message: "This is a protected route",
     data: {
-      user: res.locals.user,
+      user: req.user,
     },
   });
 });

@@ -4,7 +4,6 @@ const authRouter = Router();
 import validate from "../middleware/validate";
 
 authRouter.post("/login", validate.login, authController.login);
-authRouter.post("/logout", authController.logout);
 authRouter.post("/register", validate.register, authController.register);
 
 export default authRouter;
