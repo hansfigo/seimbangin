@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import db from "../db";
 import { transactionsTable, usersTable } from "../db/schema";
 import { validationResult } from "express-validator";
-import { eq } from "drizzle-orm";
+import { count, eq } from "drizzle-orm";
 import { createResponse } from "../utils/response";
 
 const createNewBalance = ({
@@ -129,15 +129,42 @@ export const transactionController = {
   },
 
   getAll: async (req: Request, res: Response) => {
+    // get query params
+    const { limit, page } = req.query;
+
+    const offset =
+      limit && page ? Number(limit) * (Number(page) - 1) : undefined;
     const userId = req.user.id;
 
     const transactions = await db.query.transactionsTable.findMany({
       where: (transaction, { eq }) => eq(transaction.user_id, userId),
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
     });
 
-    res.send({
-      status: "success",
+    const totalData = await db
+      .select({ count: count() })
+      .from(transactionsTable)
+      .then((data) => {
+        return Number(data[0].count);
+      });
+
+    createResponse.success({
+      res,
+      message: "Transactions retrieved successfully",
       data: transactions,
+      meta: {
+        currentPage: page || 1,
+        limit: Number(limit) || transactions.length,
+        totalItems: totalData,
+        totalPages: Math.ceil(
+          totalData / (Number(limit) || transactions.length),
+        ),
+        hasNextPage:
+          totalData >
+          (Number(limit) || transactions.length) * (Number(page) || 1),
+        hasPreviousPage: Number(page) > 1,
+      },
     });
   },
 

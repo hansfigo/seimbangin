@@ -4,6 +4,7 @@ interface SuccessResponse {
   res: Response;
   message: string;
   data?: any;
+  meta?: any;
 }
 
 interface ErrorResponse {
@@ -14,12 +15,13 @@ interface ErrorResponse {
 }
 
 export const createResponse = {
-  success: ({ res, message, data }: SuccessResponse) => {
+  success: ({ res, message, data, meta }: SuccessResponse) => {
     res.json({
       status: "success",
       code: 200,
       message,
       data,
+      meta,
     });
   },
 
