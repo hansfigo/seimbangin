@@ -10,7 +10,7 @@
     "copy-assets": "ts-node scripts/copy-assets",
     "clean": "rimraf dist .logs",
     "lint": "prettier --check . && eslint .",
-		"format": "prettier --write .",
+    "format": "prettier --write .",
     "studio": "drizzle-kit studio --config drizzle.config.ts",
     "generate": "drizzle-kit generate",
     "migrate": "tsx src/db/migrate.ts",
